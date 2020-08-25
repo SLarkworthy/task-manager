@@ -1,55 +1,38 @@
-const mongodb = require('mongodb');
-const MongoClient = mongodb.MongoClient;
+const { MongoClient, ObjectID } = require('mongodb');
 
 const connectionURL = "mongodb://127.0.0.1:27017" 
 const databaseName = "task-manager"
+
 
 MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) => {
     if (error) {
         return console.log('Unable to connect to database');
     }
     const db = client.db(databaseName);
-    // db.collection('users').insertOne({
-    //     name: "Sarah",
-    //     age: 25
-    // }, (error, result) => {
+    
+    // db.collection('users').findOne({ age: 10 }, (error, user) => {
     //     if (error) {
-    //         return console.log("Unable to insert user")
+    //         return console.log("unable to fetch")
     //     }
-    //     console.log(result.ops)
+    //     console.log(user)
     // })
 
-    // db.collection('users').insertMany([
-    //     {
-    //         name: "Tom",
-    //         age: 30
-    //     }, {
-    //         name: "Kevin",
-    //         age: 23
-    //     }
-    // ], (error, result) => {
+    // db.collection('tasks').findOne({ _id: new ObjectID('5f43f79800a8310e33f02b45') }, (error, task) => {
     //     if (error) {
-    //         return console.log("Unable to insert documents")
+    //         return console.log("unable to fetch")
     //     }
-    //     console.log(result.ops)
+
+    //     console.log(task)
     // })
 
-    db.collection('tasks').insertMany([
-        {
-            description: "walk dog",
-            status: false
-        }, {
-            description: "call John",
-            status: true
-        }, {
-            description: "meeting with board",
-            status: false
-        }
-    ], (error, result) => {
-        if (error) {
-            return console.log("Unable to insert documents");
-        }
-        console.log(result.ops)
+    // db.collection('tasks').find({ status: false }).toArray((error, tasks) => {
+    //     console.log(tasks)
+    // })
+
+    db.collection('tasks').updateMany({ status: false }, { 
+        $set: {status: true} 
     })
+    .then(task => console.log(task))
+    .catch(error => console.log(error))
 })
 
