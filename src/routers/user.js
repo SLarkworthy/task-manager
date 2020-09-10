@@ -14,6 +14,16 @@ router.post('/users', async (req, res) => {
     }
 })
 
+router.post('/users/login', async (req, res) => {
+    try {
+        //creating our own User method
+        const user = await User.findByCredentials(req.body.email, req.body.password);
+        res.send(user);
+    } catch (e) {
+        res.status(400).send();
+    }
+})
+
 router.get('/users', async (req, res) => {
     try {
         const users = await User.find({}) //fetches all users stored in the db and returns a promise
