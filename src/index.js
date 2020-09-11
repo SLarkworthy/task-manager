@@ -8,6 +8,19 @@ const taskRouter = require('./routers/task')
 const app = express();
 const port = process.env.PORT || 3000;
 
+// app.use((req, res, next) => {
+//     if (req.method === 'GET'){
+//         res.send('GET requests are disabled')
+//     } else {
+//         next() //must call this when the middleware function is done
+//     }
+// })
+
+//maintenance mode
+// app.use((req, res, next) => {
+//     res.status(503).send('Site in maintenance, try again later');
+// })
+
 app.use(express.json()) //parses incoming json to an object
 app.use(userRouter)
 app.use(taskRouter)
