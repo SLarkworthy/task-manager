@@ -41,3 +41,11 @@ const myFunction = async () => {
 
 myFunction();
 
+const main = async () => {
+    // const task = await Task.findById('5f66609ef2655b2ae4921ecf');
+    // await task.populate('owner').execPopulate();//finds the user and makes task.owner the entire owner
+    // console.log(task);
+
+
+}
+main();
