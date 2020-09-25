@@ -1,1 +1,4 @@
 /node_modules
+dev.env
+JWT_SECRET=
+MONGODB_URL=
